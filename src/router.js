@@ -35,20 +35,22 @@ export default new Router({
         {
             path: '/home',
             component: Home,
+            redirect: '/dashBoard',
             children: [{
                     path: '/dashBoard',
                     component: DashBoard,
-                    meta: { title: '系统首页' },
-                    icon: 'fa-home'
+                    name: '系统首页',
+                    meta: { icon: 'fa-home', title: '系统首页' },
                 },
                 {
                     path: '/component',
-                    meta: { title: '组件' },
-                    icon: 'fa-th-large',
+                    meta: { icon: 'fa-th-large', title: '组件' },
                     component: { render(c) { return c('router-view') } },
+                    redirect: '/component/vueDraggable',
                     children: [{
                         path: '/component/vueDraggable',
                         component: vueDraggable,
+                        name: '拖拽',
                         meta: { title: '拖拽' }
                     }]
                 },
@@ -81,17 +83,19 @@ export default new Router({
                 // },
                 {
                     path: '/wrong',
-                    meta: { title: '错误页面' },
-                    icon: 'fa-bullhorn',
+                    meta: { title: '错误页面', icon: 'fa-bullhorn' },
                     component: { render(c) { return c('router-view') } },
+                    redirect: '/wrong/view404',
                     children: [{
                             path: '/wrong/view404',
                             component: View404,
+                            name: '404页面',
                             meta: { title: '404页面' }
                         },
                         {
                             path: '/wrong/rights',
                             component: Rights,
+                            name: '权限页面',
                             meta: { title: '权限页面' }
                         }
                     ]

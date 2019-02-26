@@ -1,33 +1,30 @@
 <template>
    <div class="sidebar">
-      <el-menu default-active="1-4-1"
+      <el-menu 
       background-color="#324157"
       text-color="#fff"
       active-text-color="#2d8cf0"
       class="menu"
-       @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-         <el-submenu index="1">
-            <template slot="title">
-               <i class="el-icon-location"></i>
-               <span slot="title">导航一</span>
-            </template>
-            <el-menu-item-group>
-               <span slot="title">分组一</span>
-               <el-menu-item index="1-1">选项1</el-menu-item>
-               <el-menu-item index="1-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-               <el-menu-item index="1-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="1-4">
-               <span slot="title">选项4</span>
-               <el-menu-item index="1-4-1">选项1</el-menu-item>
+      router
+      unique-opened
+      :default-active="$route.path"
+      :collapse="isCollapse">
+      <div v-for="(items,id) in $router.options.routes" :key="id">
+         <div v-for="(item,index) in items.children" :key="index">
+            <el-submenu :index="item.path" v-if="item.children">
+               <template slot="title">
+                  <i class="fa fa-fw" :class="item.meta.icon"></i>
+                  <span slot="title">{{item.meta.title}}</span>
+               </template>
+               <el-menu-item v-for="(value,values) in item.children" :key='values'
+                :index="value.path">{{value.meta.title}}</el-menu-item>
             </el-submenu>
-         </el-submenu>
-         <el-menu-item index="2">
-            <i class="el-icon-menu"></i>
-            <span slot="title">导航二</span>
-         </el-menu-item>
+            <el-menu-item :index="item.path" v-else>
+               <i class="fa fa-fw" :class="item.meta.icon"></i>
+               <span slot="title">{{item.meta.title}}</span>
+            </el-menu-item>
+         </div>
+      </div>
       </el-menu>      
    </div>
 </template>
@@ -38,18 +35,13 @@ export default {
     data() {
       return {
         isCollapse: false
+
       };
     },
     created(){
-         
-    },
-    methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      }
+       bus.$on('collapse',msg=>{
+          this.isCollapse=msg
+       })
     }
 }
 </script>
@@ -61,22 +53,33 @@ export default {
    &::-webkit-scrollbar{
       width: 0;
    }
+   .el-menu--collapse .el-menu-item span,.el-menu--collapse .el-submenu>.el-submenu__title span{
+         display: none
+      }
+   & /deep/.el-menu--collapse .el-submenu__title .el-submenu__icon-arrow,.el-menu--collapse .el-submenu__title.el-icon-arrow-right{
+      display: none!important
+   }
    .menu{
+      height: 100%;
+      .fa-fw{
+         font-size: 15px;
+         color: inherit;
+         margin-right: 6px;
+      }
       &:not(.el-menu--collapse) {
-         width: 201px;
+         width: 200px;
          height: 100%;
+         border-right-width: 0;
       }
-      .el-menu-item-group__title{
-         padding: 0;
-      }
-      .el-menu-item{
-         width: 200px;
-      }
-      .el-submenu{
-         width: 200px;
-      }
+      // .el-menu-item{
+      //    width: 200px;
+      // }
+      // .el-submenu{
+      //    width: 200px;
+      // }
    }
    
    
 }
 </style>
+

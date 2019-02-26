@@ -1,10 +1,16 @@
 <template>
   <el-container class="layout">
-      <el-header>Header</el-header>
+      <el-header>
+        <v-head></v-head>
+      </el-header>
       <el-container>
         <v-side></v-side>
         <el-container class="contain">
-          <el-main>Main</el-main>
+          <el-main>
+             <bread-crumb></bread-crumb>
+             <v-tag></v-tag>
+             <app-main></app-main>
+          </el-main>
         </el-container>
       </el-container>
   </el-container>
@@ -14,12 +20,15 @@
 import vHead from './components/v-head'
 import vTag from './components/v-tag'
 import vSide from './components/v-side'
-import bus from "./components/bus"
+import appMain from './components/appMain'
+import breadCrumb from './components/breadCrumb'
 export default {
   components:{
     vHead,
     vTag,
-    vSide
+    vSide,
+    appMain,
+    breadCrumb
   },
   data(){
     return{
@@ -34,22 +43,19 @@ export default {
 .layout{
   width: 100%;
   height: 100%;
+  .el-header{
+    padding: 0;
+  }
   .contain{
     width: 100%;
     height: 100%;
+    .el-main {
+      padding: 0;
+      background-color: #E9EEF3;
+    }
   }
 }
-.el-header, .el-footer {
-    background-color: #B3C0D1;
-    color: #333;
-    text-align: center;
-    line-height: 60px;
-  }
-  // .el-main {
-  //   background-color: #E9EEF3;
-  //   color: #333;
-  //   text-align: center;
-  //   line-height: 160px;
-  // }
+
+
   
 </style>

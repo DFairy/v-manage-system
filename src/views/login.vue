@@ -14,7 +14,7 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" size="small" class="gradient-btn">Login</el-button>
+                    <el-button type="primary" size="small" class="gradient-btn"  @click="submitForm('login')">Login</el-button>
                 </el-form-item>                
             </el-form>
             <div class="tip">tips:用户名和密码随便填，密码不得小于6位数</div>
@@ -44,9 +44,8 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            this.$router.push('/dashBoard')
           } else {
-            console.log('error submit!!');
             return false;
           }
         });
