@@ -7,7 +7,7 @@ v-manage-system是一个基于vue和element的后台管理系统，可以下载�
 
 ### 项目展示
 
-[访问地址](https://dfairy.github.io/i-manage-system/#/login)
+[访问地址](https://dfairy.github.io/v-manage-system/#/login)
 ![Image text](https://raw.githubusercontent.com/DFairy/v-manage-system/master/src/common/img/show.png)
 
 
