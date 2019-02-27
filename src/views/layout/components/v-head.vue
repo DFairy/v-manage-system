@@ -1,7 +1,6 @@
 <template>
    <div class="header">
       <div class="header-left">
-         <hamburger :toggle-click="toggleClick" :is-active="isCollapse" class="hamburger-container"></hamburger>
          <div>后台管理系统</div>
       </div>
       <ul class='header-right'>
@@ -29,7 +28,7 @@
                   </span>
                   <el-dropdown-menu slot="dropdown">                    
                      <el-dropdown-item>
-                           <a href="https://github.com/lin-xin/vue-manage-system" target="_blank">项目仓库</a>
+                           <a href="https://github.com/DFairy/v-manage-system" target="_blank">项目仓库</a>
                      </el-dropdown-item>                    
                      <el-dropdown-item divided>
                         <router-link to="/login">退出登录</router-link>
@@ -60,14 +59,8 @@
 </template>
 
 <script>
-import hamburger from 'components/hamburger/index'
-import bus from './bus'
 export default {
-   components:{
-      hamburger
-   },
    data(){return{
-      isCollapse:false,
       fullscreen:false,
       username:"admin",
       dialogVisible:false,
@@ -80,10 +73,6 @@ export default {
       labelPosition: "left",
    }},
    methods:{
-      toggleClick(){
-         this.isCollapse=!this.isCollapse;
-         bus.$emit('collapse',this.isCollapse)
-      },
       //屏幕全屏与取消全屏
     handleFullScreen(){
       let element = document.documentElement;
@@ -119,8 +108,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-
-@import '../../../common/style/mixin.less';
+@import '~common/style/mixin.less';
 .header {
    .flex(space-between);
    padding: 0 20px;
@@ -131,16 +119,6 @@ export default {
    // line-height: 60px;
    .header-left{
       .flex(flex-start);
-      .hamburger-container {
-         line-height: 46px;
-         height: 100%;
-         float: left;
-         cursor: pointer;
-         transition: background .3s;
-         &:hover {
-            background: rgba(0, 0, 0, .025)
-         }
-      }
    }
    .header-right{
       .flex(space-between);

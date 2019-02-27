@@ -37,13 +37,13 @@ export default {
         if(item){
           delTag.path===this.$route.fullPath&&this.$router.push(item.path)
         }else{
-          this.$router.push('/')
+          this.$router.push('/dashBoard')
         }
       },
       //删除所有
       closeAll(){
         this.tagsList=[]
-        this.$router.push('/')
+        this.$router.push('/dashBoard')
       },
       //关闭其他
       closeOther(){
@@ -90,7 +90,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-@import '../../../common/style/mixin.less';
+@import '~common/style/mixin.less';
 .tags {
    .flex(space-between);
   width: 100%;

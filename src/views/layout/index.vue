@@ -46,11 +46,16 @@ export default {
   .el-header{
     padding: 0;
   }
+  .el-container{
+    height: 100%;
+  }
   .contain{
     width: 100%;
     height: 100%;
     .el-main {
       padding: 0;
+      width: 100%;
+      height: 100%;
       background-color: #E9EEF3;
     }
   }

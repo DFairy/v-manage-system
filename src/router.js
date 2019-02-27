@@ -5,28 +5,30 @@ const Login = () =>
     import ('views/login.vue')
 const Home = () =>
     import ('views/layout/index.vue')
-const DashBoard = () =>
-    import ('views/dashBoard.vue')
-    // const wangEditor = () =>
-    //     import ('views/Editor/wangEditor.vue')
-    // const quillEditor = () =>
-    //     import ('views/Editor/quillEditor.vue')
-    // const mavonEditor = () =>
-    //     import ('views/Editor/mavonEditor.vue')
-    // const tinymceEditor = () =>
-    //     import ('views/Editor/tinymceEditor.vue')
+    //首页
+const dashBoard = () =>
+    import ('views/dashBoard/index.vue')
+    // editor
+const wangEditor = () =>
+    import ('views/editor/wangEditor.vue')
+const quillEditor = () =>
+    import ('views/editor/quillEditor.vue')
+const mavonEditor = () =>
+    import ('views/editor/mavonEditor.vue')
+    //插件
 const vueDraggable = () =>
     import ('views/componentPage/vueDraggable.vue')
+    //错误页    
 const View404 = () =>
-    import ('views/404.vue')
+    import ('views/wrong/404.vue')
 const Rights = () =>
-    import ('views/rights.vue')
+    import ('views/wrong/rights.vue')
 Vue.use(Router)
 
 export default new Router({
     routes: [{
             path: '/',
-            redirect: '/home'
+            redirect: '/login'
         },
         {
             path: '/login',
@@ -38,7 +40,7 @@ export default new Router({
             redirect: '/dashBoard',
             children: [{
                     path: '/dashBoard',
-                    component: DashBoard,
+                    component: dashBoard,
                     name: '系统首页',
                     meta: { icon: 'fa-home', title: '系统首页' },
                 },
@@ -46,6 +48,7 @@ export default new Router({
                     path: '/component',
                     meta: { icon: 'fa-th-large', title: '组件' },
                     component: { render(c) { return c('router-view') } },
+                    name: '组件',
                     redirect: '/component/vueDraggable',
                     children: [{
                         path: '/component/vueDraggable',
@@ -54,35 +57,35 @@ export default new Router({
                         meta: { title: '拖拽' }
                     }]
                 },
-                // {
-                //     path: '/editor',
-                //     component: { render(c) { return c('router-view') } },
-                //     meta: { title: '编辑器' },
-                //     icon: 'fa-edit (alias)',
-                //     children: [{
-                //             path: '/editor/wangEditor',
-                //             component: wangEditor,
-                //             meta: { title: 'wangEditor' }
-                //         },
-                //         {
-                //             path: '/editor/quillEditor',
-                //             component: quillEditor,
-                //             meta: { title: 'quillEditor' }
-                //         },
-                //         {
-                //             path: '/editor/mavonEditor',
-                //             component: mavonEditor,
-                //             meta: { title: 'mavonEditor' }
-                //         },
-                //         {
-                //             path: '/editor/tinymceEditor',
-                //             component: tinymceEditor,
-                //             meta: { title: 'tinymceEditor' }
-                //         }
-                //     ]
-                // },
+                {
+                    path: '/editor',
+                    component: { render(c) { return c('router-view') } },
+                    name: '编辑器',
+                    meta: { icon: 'fa-edit (alias)', title: '编辑器' },
+                    redirect: '/editor/wangEditor',
+                    children: [{
+                            path: '/editor/wangEditor',
+                            component: wangEditor,
+                            name: 'wangEditor',
+                            meta: { title: 'wangEditor' }
+                        },
+                        {
+                            path: '/editor/quillEditor',
+                            component: quillEditor,
+                            name: 'quillEditor',
+                            meta: { title: 'quillEditor' }
+                        },
+                        {
+                            path: '/editor/mavonEditor',
+                            component: mavonEditor,
+                            name: 'mavonEditor',
+                            meta: { title: 'mavonEditor' }
+                        }
+                    ]
+                },
                 {
                     path: '/wrong',
+                    name: '错误页面',
                     meta: { title: '错误页面', icon: 'fa-bullhorn' },
                     component: { render(c) { return c('router-view') } },
                     redirect: '/wrong/view404',

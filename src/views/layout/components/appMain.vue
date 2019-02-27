@@ -36,11 +36,11 @@ export default {
 
 <style scoped>
 .app-main {
+  background: rgb(255, 255, 255);
   margin: 10px;
-  /*84 = navbar + tags-view = 50 +34 */
-  /* min-height: calc(100vh - 84px); */
-  width: 100%;
+  height: calc(100% - 108px);
   position: relative;
   overflow: hidden;
+  font-size: 14px;
 }
 </style>
